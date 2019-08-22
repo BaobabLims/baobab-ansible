@@ -1,6 +1,6 @@
 [submodule "roles/ansible.plone_server"]
 	path = roles/ansible.plone_server
-	url = https://github.com/Banshee1221/ansible.plone_server
+	url = git@github.com:BaobabLims/ansible.plone_server.git
 [submodule "roles/ansible-role-nginx"]
 	path = roles/ansible-role-nginx
-	url = https://github.com/nginxinc/ansible-role-nginx.git
+	url = git@github.com:BaobabLims/ansible-role-nginx.git

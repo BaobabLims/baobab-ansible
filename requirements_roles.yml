@@ -1,0 +1,16 @@
+- src: https://github.com/SANBI-SA/sanbi-basic-server
+name: sanbi-basic-server
+- src: https://github.com/SANBI-SA/ansible-galaxy-os
+name: ansible-galaxy-os
+- src: https://github.com/SANBI-SA/ansible-postgresql-objects.git
+name: ansible-postgresql-objects
+- src: https://github.com/SANBI-SA/ansible-galaxy.git
+name: ansible-galaxy
+- src: https://github.com/SANBI-SA/ansible-galaxy-extras.git
+name: ansible-galaxy-extras
+- src: https://github.com/SANBI-SA/ansible-galaxy-pam-auth-sanbi.git
+name: ansible-galaxy-pam-auth-sanbi
+- src: https://github.com/SANBI-SA/ansible-galaxy-envmodules-sanbi-.git
+name: ansible-galaxy-envmodules-sanbi-
+- src: https://github.com/SANBI-SA/ansible-galaxy-sge-sanbi.git
+name: ansible-galaxy-sge-sanbi

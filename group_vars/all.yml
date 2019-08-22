@@ -1,9 +1,9 @@
 # Server settings
 
-server_hostname: "baobab-test"
+server_hostname: "baobab-staging"
 
 # Plone settings
-plone_target_path: "/usr/local/Plone"
+plone_target_path: "/opt/baobab"
 plone_var_path: "/var/local/Plone"
 plone_instance_name: "{{ server_hostname }}"
 plone_initial_password: 123qwe
