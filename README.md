@@ -26,7 +26,7 @@ This ansible playbook is used to deploy a production-ready [Baobab LIMS](https:/
 
     ```ini
     [baobab]
-    baobab-test.sanbi.ac.za ansible_user=ubuntu
+    baobab.sanbi.ac.za ansible_user=ubuntu
     ```
 
 - Edit the `group_vars/all.yml` file to reflect the settings you need. You mainly just need to edit the `server_hostname` and `plone_initial_password`.
