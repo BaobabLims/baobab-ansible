@@ -27,7 +27,18 @@ plone_buildout_extra: |
     src/bika.lims
     src/baobab.lims
     src/graphite.theme
+
+plone_extension_profiles:
+    - mr.developer
+
+plone_sources: 
+  - "bika.lims = git git://github.com/zipho/bika.lims.git pushurl=git@github.com:zipho/bika.lims.git branch=master"
+  - "baobab.lims = git git://github.com/zipho/baobab.lims.git pushurl=git@github.com:zipho/baobab.lims.git branch=master"
+  - "graphite.theme = git git://github.com/zipho/graphite.theme.git pushurl=git@github.com:zipho/graphite.theme.git"
+
 plone_client_base_port: 8080
+plone_additional_versions:
+  - "cairocffi = 0.4"
 
 nginx_enable: true
 nginx_main_template_enable: true
@@ -43,6 +54,11 @@ nginx_http_template:
     error_page: /usr/share/nginx/html
     https_redirect: false
     autoindex: false
+    listen: 
+      listen_localhost:
+        ip: localhost # Wrap in square brackets for IPv6 addresses
+        port: 8081
+        opts: []
     # ssl:
     #   cert: /etc/ssl/certs/default.crt
     #   key: /etc/ssl/private/default.key
