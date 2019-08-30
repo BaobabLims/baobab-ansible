@@ -23,7 +23,7 @@
           state: directory
       - name: Fetch git repos
         git:
-          repo: "https://github.com/BaobabLims/{{ item }}.git"
+          repo: "https://github.com/zipho/{{ item }}.git"
           dest: "{{plone_target_path}}/{{ plone_instance_name }}/src/{{ item }}"
         loop:
           - bika.lims
@@ -41,6 +41,16 @@
     - include_role:
         name: ansible.plone_server
   post_tasks:
+    # Examples from Ansible Playbooks
+    - easy_install:
+        name: pip
+        state: latest
+
+    # Install xlsxwriter into the specified virtualenv.
+    - easy_install:
+        name: xlsxwriter
+        virtualenv: "{{plone_target_path}}//python2.7"
+        
     - name: Restart supervisord agents
       supervisorctl:
         name: "{{ item }}"

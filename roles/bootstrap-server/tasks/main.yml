@@ -13,6 +13,8 @@
     update_cache: yes
   when: "('debian' in ansible_distribution|lower) or ('ubuntu' in ansible_distribution|lower)"
 
+#    virtualenv: "{{ plone_target_path }}/python2.7/"
+
 # - name: Install requirements for Baobab LIMS on CentOS
 
 #   package:
