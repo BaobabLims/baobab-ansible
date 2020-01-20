@@ -1,6 +1,6 @@
 # Server settings
 
-server_hostname: "baobab-staging"
+server_hostname: "stage.baobablims.org"
 
 # Plone settings
 plone_target_path: "/opt/baobab"
@@ -40,7 +40,7 @@ plone_client_base_port: 8080
 plone_additional_versions:
   - "cairocffi = 0.4"
   - "Products.AdvancedQuery = 3.0.4"
-  - "xlsxwriter == 1.2.0"
+  - "xlsxwriter = 1.2.0"
 
 nginx_enable: true
 nginx_main_template_enable: true
@@ -64,17 +64,34 @@ nginx_http_template:
     # ssl:
     #   cert: /etc/ssl/certs/default.crt
     #   key: /etc/ssl/private/default.key
+    add_headers:
+      x_frame_options:
+        name: X-Frame-Options
+        value: SAMEORIGIN
+        always: true
+      strict_transport_security:
+        name: Strict-Transport-Security
+        value: max-age=15768000; includeSubDomains
+        always: true
+      x_xss_protection:
+        name: X-XSS-Protection
+        value: 1; mode=block
+        always: true
+      content_security_policy_report_only:
+        name: Content-Security-Policy-Report-Only
+        value: default-src 'self'; img-src *; style-src 'self' 'unsafe-inline'; script-sr
+        always: false
     reverse_proxy:
       locations:
-        backend:
+        baobabservers:
           location: /
-          proxy_pass: "http://baobab_servers/VirtualHostBase/http/{{ server_hostname }}:80/StageBaobab/VirtualHostRoot/"
+          proxy_pass: "http://baobabservers/VirtualHostBase/http/{{ inventory_hostname }}:80/VirtualHostRoot/"
       health_check_plus: false
     upstreams:
-      baobab_servers:
-        name: baobab_servers
+      baobabservers:
+        name: baobabservers
         lb_method: least_conn
-        zone_name: backend
+        zone_name: upstream_baobabservers
         zone_size: 64k
         sticky_cookie: false
         servers:
@@ -87,39 +104,4 @@ nginx_http_template:
             address: 127.0.0.1
             port: 8081
             weight: 1
-            health_check: max_fails=1 fail_timeout=10s
-
-# # This adds security headers                                                                                              
-# add_header X-Frame-Options "SAMEORIGIN";                                                                                  
-# add_header Strict-Transport-Security "max-age=15768000; includeSubDomains";                                               
-# add_header X-XSS-Protection "1; mode=block";                                                                              
-# add_header X-Content-Type-Options "nosniff";                                                                              
-# #add_header Content-Security-Policy "default-src 'self'; img-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'u
-# add_header Content-Security-Policy-Report-Only "default-src 'self'; img-src *; style-src 'self' 'unsafe-inline'; script-sr
-                                                                                                                          
-# upstream baobabservers {                                                                                                  
-#     least_conn;                                                                                                           
-#     zone upstream_baobabservers 64k;                                                                                      
-#     server 127.0.0.1:8080 weight=1 max_fails=1 fail_timeout=10s;                                                          
-#     server 127.0.0.1:8081 weight=1 max_fails=1 fail_timeout=10s;                                                          
-# }                                                                                                                         
-                                                                                                                          
-# server {                                                                                                                  
-#     listen 80;                                                                                                            
-#     server_name 192.168.10.62;                                                                                            
-#     access_log /var/log/nginx/stage.baobablims.org.access.log;                                                            
-#     error_log /var/log/nginx/stage.baobablims.org.error.log;                                                              
-                                                                                                                          
-#     location / {                                                                                                          
-#         #proxy_pass http://127.0.0.1:8080;                                                                                
-#         proxy_pass http://baobabservers/VirtualHostBase/http/192.168.10.62:80/StageBaobab/VirtualHostRoot/;               
-#         #proxy_pass http://baobabservers;                                                                                 
-#     }                                                                                                                     
-                                                                                                                          
-#     # redirect server error pages to the static page /50x.html                                                            
-                                                                                                                          
-#     error_page   500 502 503 504  /50x.html;                                                                              
-#     location = /50x.html {                                                                                                
-#         root   /usr/share/nginx/html;                                                                                     
-#     }                                                                                                                     
-# }                        
+            health_check: max_fails=1 fail_timeout=10s                 
