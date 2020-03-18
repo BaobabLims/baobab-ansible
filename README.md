@@ -17,7 +17,7 @@ This ansible playbook is used to deploy a production-ready [Baobab LIMS](https:/
 - Firstly, clone the repo and download the submodules as well:
 
     ```shell
-    git clone https://github.com/Banshee1221/baobab-ansible.git
+    git clone https://github.com/BaobabLims/baobab-ansible.git
     cd baobab-ansible
     git submodule update --init --recursive
     ```

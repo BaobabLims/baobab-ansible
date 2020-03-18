@@ -1,6 +1,6 @@
 # Server settings
 
-server_hostname: "stage.baobablims.org"
+server_hostname: "demo.baobablims.org"
 
 # Plone settings
 plone_target_path: "/opt/baobab"
@@ -32,15 +32,16 @@ plone_extension_profiles:
     - mr.developer
 
 plone_sources: 
-  - "bika.lims = git git://github.com/zipho/bika.lims.git pushurl=git@github.com:zipho/bika.lims.git branch=reports"
-  - "baobab.lims = git git://github.com/zipho/baobab.lims.git pushurl=git@github.com:zipho/baobab.lims.git branch=master"
-  - "graphite.theme = git git://github.com/zipho/graphite.theme.git pushurl=git@github.com:zipho/graphite.theme.git branch=master"
+  - "bika.lims = git git://github.com/BaobabLims/bika.lims.git pushurl=git@github.com:BaobabLims/bika.lims.git branch=reports"
+  - "baobab.lims = git git://github.com/BaobabLims/baobab.lims.git pushurl=git@github.com:BaobabLims/baobab.lims.git branch=master"
+  - "graphite.theme = git git://github.com/BaobabLims/graphite.theme.git pushurl=git@github.com:BaobabLims/graphite.theme.git branch=master"
 
 plone_client_base_port: 8080
 plone_additional_versions:
   - "cairocffi = 0.4"
   - "Products.AdvancedQuery = 3.0.4"
   - "xlsxwriter = 1.2.0"
+  - "openpyxl = 2.5.4"
 
 nginx_enable: true
 nginx_main_template_enable: true
